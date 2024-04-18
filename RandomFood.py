@@ -1,7 +1,7 @@
 import random
 import pyfiglet
 
-read = open("projects/RandomFood.txt", "r")
+read = open("RandomFood.txt", "r")
 data = read.read()
 
 low_cost_list = ["Hinz", "Face To Face", "Mama Homecook"]
@@ -17,7 +17,7 @@ def random_choice(choice):
         answer += random.choice(medium_cost_list)
     elif choice == "high":
         answer += random.choice(high_cost_list)
-    write = open("projects/RandomFood.txt", "w")
+    write = open("RandomFood.txt", "w")
     write.write(answer)
     write.close()
     print(answer)
