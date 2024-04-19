@@ -4,8 +4,8 @@ import pyfiglet
 read = open("RandomFood.txt", "r")
 data = read.read()
 
-low_cost_list = ["Hinz", "Face To Face", "Mama Homecook"]
-medium_cost_list = ["Mcdonalds", "Kung Fu", "Taco Bell", "Texas"]
+low_cost_list = ["Hinz", "Face To Face", "Mama Homecook", "Mcdonalds"]
+medium_cost_list = ["Kung Fu", "Taco Bell", "Texas"]
 high_cost_list = ["Uncle Dons", "A&W", "Domino's Pizza", "4 Fingers"]
 all_list = [low_cost_list, medium_cost_list, high_cost_list]
 
@@ -20,9 +20,10 @@ def random_choice(choice):
     write = open("RandomFood.txt", "w")
     write.write(answer)
     write.close()
-    print(answer)
+    ascii_answer = pyfiglet.figlet_format(answer)
+    print(ascii_answer)
 
-ascii_art = pyfiglet.figlet_format("Random Food Generator")
+ascii_art = pyfiglet.figlet_format("Makan Apa ???")
 print(ascii_art)
 print(f"Your last chosen restaurant was: {data}")
 choice = input("What cost would you wanna choose? (low, medium, high)\n").lower()
