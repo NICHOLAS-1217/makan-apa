@@ -1,5 +1,6 @@
 import random
 import pyfiglet
+from FoodPanda import filter
 
 read = open("RandomFood.txt", "r")
 data = read.read()
@@ -23,11 +24,15 @@ def random_choice(choice):
     ascii_answer = pyfiglet.figlet_format(answer)
     print(ascii_answer)
 
+# introduction
 ascii_art = pyfiglet.figlet_format("Makan Apa ???")
 print(ascii_art)
 print(f"Your last chosen restaurant was: {data}")
+
+# choice input
 choice = input("What cost would you wanna choose? (low, medium, high)\n").lower()
 
+# process logic
 if data in low_cost_list:
     low_cost_list.remove(data)
     random_choice(choice = choice)
