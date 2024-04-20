@@ -1,4 +1,5 @@
 import pandas as pd
+import random
 
 data = pd.read_csv("restaurants_data_analysis.csv")
 print(data)
@@ -21,5 +22,6 @@ elif budget == "high":
 def filter(location, cost):
     filtering = data[(data["city"] == location) & (data["budget"] == cost) & (data["vertical_parent"] == "Restaurant")]
     restaurants = filtering[["budget", "name", "city"]]
-    print(restaurants)
+    restaurants_list = restaurants.values.tolist()
+    print(random.choice(restaurants_list[1]))
 filter(location = location, cost = cost)
