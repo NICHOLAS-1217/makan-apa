@@ -3,27 +3,9 @@ from FoodPanda import filter
 
 if __name__ == "__main__":
 
+    # read text file
     read = open("RandomFood.txt", "r")
     data = read.read()
-
-    # low_cost_list = ["Hinz", "Face To Face", "Mama Homecook", "Mcdonalds"]
-    # medium_cost_list = ["Kung Fu", "Taco Bell", "Texas"]
-    # high_cost_list = ["Uncle Dons", "A&W", "Domino's Pizza", "4 Fingers"]
-    # all_list = [low_cost_list, medium_cost_list, high_cost_list]
-
-    # def random_choice(choice):
-    #     answer = ""
-    #     if choice == "low":
-    #         answer += random.choice(low_cost_list)
-    #     elif choice == "medium":
-    #         answer += random.choice(medium_cost_list)
-    #     elif choice == "high":
-    #         answer += random.choice(high_cost_list)
-    #     write = open("RandomFood.txt", "w")
-    #     write.write(answer)
-    #     write.close()
-    #     ascii_answer = pyfiglet.figlet_format(answer)
-    #     print(ascii_answer)
 
     # introduction
     intro = pyfiglet.figlet_format("Makan Apa ???")
@@ -45,19 +27,22 @@ if __name__ == "__main__":
 
     filter(location = location, cost = cost)
 
-    # # process logic
-    # if data in low_cost_list:
-    #     low_cost_list.remove(data)
-    #     random_choice(choice = choice)
-    #     low_cost_list.append(data)
-    # elif data in medium_cost_list:
-    #     medium_cost_list.remove(data)
-    #     random_choice(choice = choice)
-    #     medium_cost_list.append(data)
-    # elif data in high_cost_list:
-    #     high_cost_list.remove(data)
-    #     random_choice(choice = choice)
-    #     high_cost_list.append(data)
+    is_good = False
+
+    try_time = 0
+
+    while is_good == False:
+        result = input("Is this good for you? (y/n)\n")
+        if result == "n":
+            filter(location = location, cost = cost)
+            is_good = False
+            try_time += 1
+            if try_time > 3:
+                print(pyfiglet.figlet_format("You are picky eater, no need to eat"))
+                is_good = True
+        else:
+            print("let's goooo!!!")
+            is_good = True
 
 
 
