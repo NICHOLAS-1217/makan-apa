@@ -13,11 +13,13 @@ def CenterWindowToDisplay(Screen: Tk, width: int, height: int):
     y = int((screen_height/2) - (height/1.5))
     return f"{width}x{height}+{x}+{y}"
 root = tkinter.Tk()
-root.title("Makan Apa ?")
-root.geometry("918x455")
+photo = tkinter.PhotoImage(file = "makan_icon.png")
+root.wm_iconphoto(False, photo)
+root.title("Makan Apa ???")
+root.geometry("500x455")
 root.geometry(CenterWindowToDisplay(root, 900, 400)) 
 h1 = tkinter.font.Font(family = "System",  size = 30)
-h2 = tkinter.font.Font(family = "System",  size = 20)  
+h2 = tkinter.font.Font(family = "Courier New",  size = 20)  
 
 # read files
 read = open("RandomFood.txt", "r")
@@ -128,7 +130,7 @@ def submit():
         filter(location = location, cost = cost)
     else:
         messagebox.showerror("showerror", "You are picky eater, no need to eat") 
-        result = tkinter.Label(root, text = "You are picky eater, no need to eat")
+        result = tkinter.Label(root, text = "You little picky eater, no need to eat")
         result.pack()
         result.configure(font = h1)
 submit_button = tkinter.Button(root, text = "submit", command = submit)
