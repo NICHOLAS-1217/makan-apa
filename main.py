@@ -1,9 +1,23 @@
 import pyfiglet
-from FoodPanda import filter
+import pandas as pd
+import random
 
 # read text file
 read = open("RandomFood.txt", "r")
 data = read.read()
+df = pd.read_csv("restaurants_data_analysis.csv")
+
+def filter(location, cost):
+    filtering = df[(df["city"] == location) & (df["budget"] == cost) & (df["vertical_parent"] == "Restaurant")]
+    restaurants = filtering[["budget", "name", "city"]]
+    restaurants_list = restaurants.values.tolist()
+    answer = random.choice(restaurants_list)
+    write = open("RandomFood.txt", "w")
+    write.write(str(answer[1]))
+    write.close()
+    print(answer)
+    result = pyfiglet.figlet_format(answer[1])
+    print(result)
 
 # introduction
 intro = pyfiglet.figlet_format("Makan Apa ???")
