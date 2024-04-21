@@ -5,9 +5,17 @@ import pandas as pd
 import random
 
 # tkinter settings
+def CenterWindowToDisplay(Screen: Tk, width: int, height: int):
+    """Centers the window to the main display/monitor"""
+    screen_width = Screen.winfo_screenwidth()
+    screen_height = Screen.winfo_screenheight()
+    x = int((screen_width/2) - (width/2))
+    y = int((screen_height/2) - (height/1.5))
+    return f"{width}x{height}+{x}+{y}"
 root = tkinter.Tk()
 root.title("Makan Apa ?")
-root.geometry("918x450")
+root.geometry("918x455")
+root.geometry(CenterWindowToDisplay(root, 900, 400)) 
 h1 = tkinter.font.Font(family = "System",  size = 30)
 h2 = tkinter.font.Font(family = "System",  size = 20)  
 
@@ -107,17 +115,18 @@ counter = 0
 def submit():
     global counter
     counter += 1
-    location = location_input.get()
-    budget = budget_input.get()
-    cost = 0
-    if budget == "low":
-        cost = 1
-    elif budget == "medium":
-        cost = 2
-    elif budget == "high":
-        cost = 3
-    filter(location = location, cost = cost)
-    if counter > 3:
+    if counter <= 3:
+        location = location_input.get()
+        budget = budget_input.get()
+        cost = 0
+        if budget == "low":
+            cost = 1
+        elif budget == "medium":
+            cost = 2
+        elif budget == "high":
+            cost = 3
+        filter(location = location, cost = cost)
+    else:
         messagebox.showerror("showerror", "You are picky eater, no need to eat") 
         result = tkinter.Label(root, text = "You are picky eater, no need to eat")
         result.pack()
