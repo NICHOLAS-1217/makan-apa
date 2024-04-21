@@ -1,12 +1,94 @@
-import pyfiglet
+from tkinter import *
+from tkinter import messagebox
+import tkinter.font
 import pandas as pd
 import random
 
-# read text file
+# tkinter settings
+root = tkinter.Tk()
+root.title("Makan Apa ?")
+root.geometry("918x450")
+h1 = tkinter.font.Font(family = "System",  size = 30)
+h2 = tkinter.font.Font(family = "System",  size = 20)  
+
+# read files
 read = open("RandomFood.txt", "r")
 data = read.read()
 df = pd.read_csv("restaurants_data_analysis.csv")
 
+# intoduction
+intro = tkinter.Label(root, text = "Makan Apa???")
+intro.pack()
+intro.configure(font = h1) 
+
+# question 1
+question1 = tkinter.Label(root, text = "Where are you?")
+question1.pack()
+question1.configure(font = h2)
+location_input = StringVar()
+location_input.set("Cyberjaya")
+drop =  OptionMenu(root, location_input, 
+                    "Cyberjaya", 
+                    "Kuala Lumpur", 
+                    "Kajang", 
+                    "Bangi", 
+                    "Petaling Jaya", 
+                    "Subang", 
+                    "Shah Alam", 
+                    "Klang", 
+                    "Putrajaya", 
+                    "Sepang", 
+                    "Rawang", 
+                    "Ipoh", 
+                    "Seri Iskandar", 
+                    "Teluk Intan", 
+                    "Kampar", 
+                    "Kepala Bantas", 
+                    "Kulim", 
+                    "Sungai Petani",
+                    "Alor Setar", 
+                    "Jitra", 
+                    "Arau", 
+                    "Kangar",
+                    "Kelantan",
+                    "Terengganu",
+                    "Kuantan", 
+                    "Temerloh",
+                    "Jerantut",
+                    "Rompin",
+                    "Negeri Sembilan",
+                    "Port Dickson",
+                    "Kuala Pilah",
+                    "Bahau",
+                    "Malacca",
+                    "Johor Bahru",
+                    "Pontian",
+                    "Ulu Tiram",
+                    "Kulai",
+                    "Kota Tinggi",
+                    "Kluang",
+                    "Segamat",
+                    "Tangkak",
+                    "Mersing",
+                    "Kuching",
+                    "Petra Jaya",
+                    "Samarahan",
+                    "Sibu",
+                    "Bintulu",
+                    "Miri",
+                    "Kota Kinabalu",
+                    "Sandakan"
+                    ).pack()
+
+# question 2
+question2 = tkinter.Label(root, text = "What is your budget?")
+question2.pack()
+question2.configure(font = h2)
+budget_input = StringVar()
+budget_input.set("low")
+drop =  OptionMenu(root, budget_input, "low", "medium", "high").pack()
+
+# submit part
 def filter(location, cost):
     filtering = df[(df["city"] == location) & (df["budget"] == cost) & (df["vertical_parent"] == "Restaurant")]
     restaurants = filtering[["budget", "name", "city"]]
@@ -16,52 +98,33 @@ def filter(location, cost):
     write.write(str(answer[1]))
     write.close()
     print(answer)
-    result = pyfiglet.figlet_format(answer[1])
-    print(result)
+    result = tkinter.Label(root, text = answer[1])
+    result.pack()
+    result.configure(font = h2)
 
-# introduction
-intro = pyfiglet.figlet_format("Makan Apa ???")
-print(intro)
-print(f"Your last chosen restaurant was: {data}")
+counter = 0
 
-# inputs
-location = input("What city are you at?\n").lower()
-location = location[0].upper() + location[1:]
-budget = input("What cost would you wanna choose? (low, medium, high)\n").lower()
+def submit():
+    global counter
+    counter += 1
+    location = location_input.get()
+    budget = budget_input.get()
+    cost = 0
+    if budget == "low":
+        cost = 1
+    elif budget == "medium":
+        cost = 2
+    elif budget == "high":
+        cost = 3
+    filter(location = location, cost = cost)
+    if counter > 3:
+        messagebox.showerror("showerror", "You are picky eater, no need to eat") 
+        result = tkinter.Label(root, text = "You are picky eater, no need to eat")
+        result.pack()
+        result.configure(font = h1)
+submit_button = tkinter.Button(root, text = "submit", command = submit)
+submit_button.pack()
+submit_button.configure(font = h2)
 
-cost = 0
-if budget == "low":
-    cost = 1
-elif budget == "medium":
-    cost = 2
-elif budget == "high":
-    cost = 3
-
-filter(location = location, cost = cost)
-
-is_good = False
-
-try_time = 0
-
-while is_good == False:
-    result = input("Is this good for you? (y/n)\n")
-    if result == "n":
-        filter(location = location, cost = cost)
-        is_good = False
-        try_time += 1
-        if try_time > 3:
-            print(pyfiglet.figlet_format("You are picky eater, no need to eat"))
-            is_good = True
-            break
-    else:
-        print("let's goooo!!!")
-        is_good = True
-        break
-
-
-
-
-
-
-
-
+# end
+root.mainloop()
