@@ -49,12 +49,14 @@ while is_good == False:
         filter(location = location, cost = cost)
         is_good = False
         try_time += 1
-        if try_time > 3:
+        if try_time > 2:
+            print("##########################################################################")
             print(pyfiglet.figlet_format("You are picky eater, no need to eat"))
             is_good = True
             break
     else:
-        print("let's goooo!!!")
+        print("##########################################################")
+        print(pyfiglet.figlet_format("let's goooo!!!"))
         is_good = True
         break
 

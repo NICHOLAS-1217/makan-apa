@@ -70,7 +70,7 @@ drop =  OptionMenu(root, location_input,
                     "Port Dickson",
                     "Kuala Pilah",
                     "Bahau",
-                    "Malacca",
+                    "Melaka",
                     "Johor Bahru",
                     "Pontian",
                     "Ulu Tiram",
@@ -108,7 +108,7 @@ def filter(location, cost):
     write.write(str(answer[1]))
     write.close()
     print(answer)
-    result = tkinter.Label(root, text = answer[1])
+    result = tkinter.Label(root, text = str(answer[1]))
     result.pack()
     result.configure(font = h2)
 
