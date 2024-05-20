@@ -1,6 +1,6 @@
 # MAKAN APA
 ## Project Description
-An app that can provide user what restaurant to eat in their city.
+An app that can provide user what restaurant to eat in their city. By using kaggle's foodpanda's dataset
 
 ## How to install and run this app?
 ### installation
