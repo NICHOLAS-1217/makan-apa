@@ -19,3 +19,5 @@ pip install -r requirements. txt
 ```bash
 python main.py
 ```
+## Sample Program
+![Screenshot (149)](https://github.com/NICHOLAS-1217/makan-apa/assets/111276608/5d74e8fe-cb68-43f6-992b-6ca30c6d24ea)
