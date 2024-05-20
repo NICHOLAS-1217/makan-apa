@@ -21,7 +21,7 @@ root.geometry(CenterWindowToDisplay(root, 900, 400))
 h1 = tkinter.font.Font(family = "System",  size = 30)
 h2 = tkinter.font.Font(family = "Courier New",  size = 20)  
 
-# read files
+# read files and create data frame
 read = open("RandomFood.txt", "r")
 data = read.read()
 df = pd.read_csv("restaurants_data_analysis.csv")
@@ -98,7 +98,7 @@ budget_input = StringVar()
 budget_input.set("low")
 drop =  OptionMenu(root, budget_input, "low", "medium", "high").pack()
 
-# submit part
+# filter the data frame
 def filter(location, cost):
     filtering = df[(df["city"] == location) & (df["budget"] == cost) & (df["vertical_parent"] == "Restaurant")]
     restaurants = filtering[["budget", "name", "city"]]
@@ -112,8 +112,8 @@ def filter(location, cost):
     result.pack()
     result.configure(font = h2)
 
+# submit 
 counter = 0
-
 def submit():
     global counter
     counter += 1
